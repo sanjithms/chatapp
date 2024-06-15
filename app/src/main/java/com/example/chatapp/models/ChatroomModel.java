@@ -4,17 +4,17 @@ import com.google.firebase.Timestamp;
 
 import java.util.List;
 
-public class chatroommodel {
+public class ChatroomModel {
     String chatroomid;
     List<String> userids;
     Timestamp lastmessagesenttimestap;
     String Lastmessagesentid;
     String Lastmessage;
 
-    public chatroommodel() {
+    public ChatroomModel() {
     }
 
-    public chatroommodel(String chatroomid, List<String> userids, Timestamp lastmessagesenttimestap, String lastmessagesentid) {
+    public ChatroomModel(String chatroomid, List<String> userids, Timestamp lastmessagesenttimestap, String lastmessagesentid) {
         this.chatroomid = chatroomid;
         this.userids = userids;
         this.lastmessagesenttimestap = lastmessagesenttimestap;

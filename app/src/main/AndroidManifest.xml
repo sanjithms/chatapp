@@ -13,7 +13,7 @@
         android:theme="@style/Theme.ChatApp"
         tools:targetApi="31">
         <activity
-            android:name=".chatacticity"
+            android:name=".ChatActivity"
             android:exported="false" />
         <activity
             android:name=".searchuseractivity"

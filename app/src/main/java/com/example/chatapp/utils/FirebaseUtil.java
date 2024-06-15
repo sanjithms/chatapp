@@ -2,7 +2,6 @@ package com.example.chatapp.utils;
 
 import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
@@ -10,17 +9,19 @@ import com.google.firebase.firestore.FirebaseFirestore;
 import java.text.SimpleDateFormat;
 import java.util.List;
 
-public class firebaseutils {
+public class FirebaseUtil {
 
     public  static  String currentuserid(){
         return FirebaseAuth.getInstance().getUid();
     }
+
     public static  Boolean isloggedin(){
         if (currentuserid()!=null){
             return true;
         }
         return false;
     }
+
      public  static DocumentReference currentuserdetaild(){
          return FirebaseFirestore.getInstance().collection("users").document(currentuserid());
      }
@@ -50,7 +51,7 @@ public class firebaseutils {
         return FirebaseFirestore.getInstance().collection("chatrooms");
      }
      public static DocumentReference getOtherUserFromChatroom(List<String> userIds){
-        if (userIds.get(0).equals(firebaseutils.currentuserid())){
+        if (userIds.get(0).equals(FirebaseUtil.currentuserid())){
             return alluserCollectionRefference().document(userIds.get(1));
         }
         else {
@@ -58,7 +59,10 @@ public class firebaseutils {
         }
 
      }
-     public  static String timestamptostring(Timestamp timestamp){
+    public static String timestamptostring(Timestamp timestamp){
         return new SimpleDateFormat("HH:MM").format(timestamp.toDate());
-     }
+    }
+    public static void logout(){
+        FirebaseAuth.getInstance().signOut();
+    }
 }

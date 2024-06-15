@@ -2,7 +2,6 @@ package com.example.chatapp;
 
 import android.os.Bundle;
 import android.view.KeyEvent;
-import android.view.View;
 import android.view.inputmethod.EditorInfo;
 import android.widget.EditText;
 import android.widget.ImageButton;
@@ -12,9 +11,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chatapp.adapter.search_user_recyle_adapter;
-import com.example.chatapp.models.usermodel;
-import com.example.chatapp.utils.firebaseutils;
+import com.example.chatapp.adapter.SearchUserRecyclerAdapter;
+import com.example.chatapp.models.UserModel;
+import com.example.chatapp.utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
@@ -23,7 +22,7 @@ public class searchuseractivity extends AppCompatActivity {
     ImageButton back_btn;
     RecyclerView recyclerView;
     EditText search_edittxt;
-    search_user_recyle_adapter adapter;
+    SearchUserRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -73,37 +72,18 @@ public class searchuseractivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(String searchuser) {
-        Query query = firebaseutils.alluserCollectionRefference()
+        Query query = FirebaseUtil.alluserCollectionRefference()
                 .whereGreaterThanOrEqualTo("username", searchuser)
                 .whereLessThanOrEqualTo("username", searchuser + "\uf8ff");
 
-        FirestoreRecyclerOptions<usermodel> options = new FirestoreRecyclerOptions.Builder<usermodel>()
-                .setQuery(query, usermodel.class).build();
+        FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
+                .setQuery(query, UserModel.class).build();
 
-        adapter = new search_user_recyle_adapter(options, getApplicationContext());
+        adapter = new SearchUserRecyclerAdapter(options, getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        if(adapter!=null)
-            adapter.startListening();
-    }
 
-    @Override
-    protected void onStop() {
-        super.onStop();
-        if(adapter!=null)
-            adapter.stopListening();
-    }
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-        if(adapter!=null)
-            adapter.startListening();
-    }
 }

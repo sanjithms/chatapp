@@ -7,15 +7,11 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ProgressBar;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.chatapp.models.usermodel;
-import com.example.chatapp.utils.firebaseutils;
+import com.example.chatapp.models.UserModel;
+import com.example.chatapp.utils.FirebaseUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
@@ -26,7 +22,7 @@ public class usernameloginactivity extends AppCompatActivity {
     ProgressBar progressBar;
     EditText login_username;
     String phonenunber;
-    usermodel userModel;
+    UserModel userModel;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -60,9 +56,9 @@ public class usernameloginactivity extends AppCompatActivity {
             userModel.setUsername(username);
         }
         else {
-            userModel=new usermodel(phonenunber,username, Timestamp.now(),firebaseutils.currentuserid());
+            userModel=new UserModel(phonenunber,username, Timestamp.now(), FirebaseUtil.currentuserid());
         }
-        firebaseutils.currentuserdetaild().set(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
+        FirebaseUtil.currentuserdetaild().set(userModel).addOnCompleteListener(new OnCompleteListener<Void>() {
             @Override
             public void onComplete(@NonNull Task<Void> task) {
                 setprogress(false);
@@ -78,12 +74,12 @@ public class usernameloginactivity extends AppCompatActivity {
 
     private void getusername() {
         setprogress(true);
-        firebaseutils.currentuserdetaild().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
+        FirebaseUtil.currentuserdetaild().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 setprogress(false);
                 if (task.isSuccessful()){
-                    userModel =task.getResult().toObject(usermodel.class);
+                    userModel =task.getResult().toObject(UserModel.class);
                     if (userModel!=null){
                         login_username.setText(userModel.getUsername());
                     }

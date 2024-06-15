@@ -1,53 +1,49 @@
 package com.example.chatapp;
 
 import android.os.Bundle;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
-import com.example.chatapp.adapter.chat_recyle_adapter;
-import com.example.chatapp.adapter.search_user_recyle_adapter;
+import com.example.chatapp.adapter.ChatRecyclerAdapter;
 import com.example.chatapp.models.ChatMessageModel;
-import com.example.chatapp.models.chatroommodel;
-import com.example.chatapp.models.usermodel;
-import com.example.chatapp.utils.androidutils;
-import com.example.chatapp.utils.firebaseutils;
+import com.example.chatapp.models.ChatroomModel;
+import com.example.chatapp.models.UserModel;
+import com.example.chatapp.utils.AndroidUtil;
+import com.example.chatapp.utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
 import com.google.firebase.Timestamp;
 import com.google.firebase.firestore.DocumentReference;
-import com.google.firebase.firestore.DocumentSnapshot;
 import com.google.firebase.firestore.Query;
 
 import java.util.Arrays;
 
-public class chatacticity extends AppCompatActivity {
-    usermodel chatuser;
+public class ChatActivity extends AppCompatActivity {
+    UserModel chatuser;
     EditText chatedittxt;
     TextView chat_txtview;
     ImageButton chat_returnbtn;
     ImageButton chat_sendbtn;
     RecyclerView recyclerView;
     String chatroomID;
-    chatroommodel chatRoommodel;
-    chat_recyle_adapter adapter;
+    ChatroomModel chatRoommodel;
+    ChatRecyclerAdapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatacticity);
 
-        chatuser = androidutils.getuserdataforintent(getIntent());
-        chatroomID = firebaseutils.getchatroomId(firebaseutils.currentuserid(), chatuser.getUserId());
+        chatuser = AndroidUtil.getuserdataforintent(getIntent());
+        chatroomID = FirebaseUtil.getchatroomId(FirebaseUtil.currentuserid(), chatuser.getUserId());
 
         // Initialize views
         chatedittxt = findViewById(R.id.chat_edittxt);
@@ -85,12 +81,12 @@ public class chatacticity extends AppCompatActivity {
 
 
     private void setupchatrecyleview() {
-        Query query = firebaseutils.getChatRoomMessageReference(chatroomID)
+        Query query = FirebaseUtil.getChatRoomMessageReference(chatroomID)
                 .orderBy("timestamp",Query.Direction.DESCENDING);
         FirestoreRecyclerOptions<ChatMessageModel> options = new FirestoreRecyclerOptions.Builder<ChatMessageModel>()
                 .setQuery(query, ChatMessageModel.class).build();
 
-        adapter = new chat_recyle_adapter(options, getApplicationContext());
+        adapter = new ChatRecyclerAdapter(options, getApplicationContext());
         LinearLayoutManager manager=new LinearLayoutManager(this);
         manager.setReverseLayout(true);
         recyclerView.setLayoutManager(manager);
@@ -109,13 +105,13 @@ public class chatacticity extends AppCompatActivity {
     private void sendmessagetouser(String message) {
 
         chatRoommodel.setLastmessagesenttimestap(Timestamp.now());
-        chatRoommodel.setLastmessagesentid(firebaseutils.currentuserid());
+        chatRoommodel.setLastmessagesentid(FirebaseUtil.currentuserid());
         chatRoommodel.setLastmessage(message);
 
-        firebaseutils.getchatroomreference(chatroomID).set(chatRoommodel);
+        FirebaseUtil.getchatroomreference(chatroomID).set(chatRoommodel);
 
-        ChatMessageModel chatMessageModel=new ChatMessageModel(message,firebaseutils.currentuserid(),Timestamp.now());
-        firebaseutils.getChatRoomMessageReference(chatroomID).add(chatMessageModel)
+        ChatMessageModel chatMessageModel=new ChatMessageModel(message, FirebaseUtil.currentuserid(),Timestamp.now());
+        FirebaseUtil.getChatRoomMessageReference(chatroomID).add(chatMessageModel)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
                     @Override
                     public void onComplete(@NonNull Task<DocumentReference> task) {
@@ -128,17 +124,17 @@ public class chatacticity extends AppCompatActivity {
     }
 
     private void getorcreateChatroom() {
-        firebaseutils.getchatroomreference(chatroomID).get().addOnCompleteListener(task -> {
+        FirebaseUtil.getchatroomreference(chatroomID).get().addOnCompleteListener(task -> {
             if(task.isSuccessful()){
-                chatRoommodel = task.getResult().toObject(chatroommodel.class);
+                chatRoommodel = task.getResult().toObject(ChatroomModel.class);
                 if (chatRoommodel == null) {
-                    chatRoommodel = new chatroommodel(
+                    chatRoommodel = new ChatroomModel(
                             chatroomID,
-                            Arrays.asList(firebaseutils.currentuserid(), chatuser.getUserId()),
+                            Arrays.asList(FirebaseUtil.currentuserid(), chatuser.getUserId()),
                             Timestamp.now(),
                             ""
                     );
-                firebaseutils.getchatroomreference(chatroomID).set(chatRoommodel);
+                FirebaseUtil.getchatroomreference(chatroomID).set(chatRoommodel);
                 }
             }
         });

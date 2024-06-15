@@ -2,16 +2,16 @@ package com.example.chatapp.models;
 
 import com.google.firebase.Timestamp;
 
-public class usermodel {
+public class UserModel {
     private String phonenumber;
     private String username;
     private Timestamp createdtimestap;
     private String userId;
 
-    public usermodel() {
+    public UserModel() {
     }
 
-    public usermodel(String phonenumber, String username, Timestamp createdtimestap,String userId) {
+    public UserModel(String phonenumber, String username, Timestamp createdtimestap, String userId) {
         this.phonenumber = phonenumber;
         this.username = username;
         this.createdtimestap = createdtimestap;

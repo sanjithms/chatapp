@@ -8,27 +8,19 @@ import android.widget.EditText;
 import android.widget.ProgressBar;
 import android.widget.TextView;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.graphics.Insets;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 
-import com.example.chatapp.utils.androidutils;
+import com.example.chatapp.utils.AndroidUtil;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
-import com.google.firebase.Firebase;
 import com.google.firebase.FirebaseException;
 import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.PhoneAuthCredential;
 import com.google.firebase.auth.PhoneAuthOptions;
 import com.google.firebase.auth.PhoneAuthProvider;
-import com.google.firebase.firestore.FirebaseFirestore;
 
-import java.util.HashMap;
-import java.util.Map;
 import java.util.Timer;
 import java.util.TimerTask;
 import java.util.concurrent.TimeUnit;
@@ -90,7 +82,7 @@ public class otploginactivity extends AppCompatActivity {
 
                             @Override
                             public void onVerificationFailed(@NonNull FirebaseException e) {
-                                androidutils.showtoast(getApplicationContext(),"OTP Verification failed");
+                                AndroidUtil.showtoast(getApplicationContext(),"OTP Verification failed");
                                 setprogress(false);
                             }
 
@@ -99,7 +91,7 @@ public class otploginactivity extends AppCompatActivity {
                                 super.onCodeSent(s, forceResendingToken);
                                 verification=s;
                                 resendingToken=forceResendingToken;
-                                androidutils.showtoast(getApplicationContext(),"OTP Sent succesfull");
+                                AndroidUtil.showtoast(getApplicationContext(),"OTP Sent succesfull");
                                 setprogress(false);
                             }
                         });
@@ -145,7 +137,7 @@ public class otploginactivity extends AppCompatActivity {
                     startActivity(intent);
                 }
                 else {
-                    androidutils.showtoast(getApplicationContext(),"invalid OTP");
+                    AndroidUtil.showtoast(getApplicationContext(),"invalid OTP");
                 }
             }
         });

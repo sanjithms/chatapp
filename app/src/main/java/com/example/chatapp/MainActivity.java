@@ -1,45 +1,64 @@
 package com.example.chatapp;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageButton;
+import android.widget.TextView;
 import android.widget.Toast;
 
-import androidx.activity.EdgeToEdge;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBarDrawerToggle;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.graphics.Insets;
 import androidx.core.view.GravityCompat;
-import androidx.core.view.ViewCompat;
-import androidx.core.view.WindowInsetsCompat;
 import androidx.drawerlayout.widget.DrawerLayout;
-import androidx.fragment.app.FragmentManager;
 
+import com.example.chatapp.utils.FirebaseUtil;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.android.material.navigation.NavigationBarView;
 import com.google.android.material.navigation.NavigationView;
 import com.google.firebase.auth.FirebaseAuth;
+import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.firestore.DocumentReference;
+import com.google.firebase.firestore.DocumentSnapshot;
+import com.google.firebase.firestore.FirebaseFirestore;
 
 public class MainActivity extends AppCompatActivity  implements NavigationView.OnNavigationItemSelectedListener{
     DrawerLayout drawerLayout;
     BottomNavigationView bottomNavigationView;
     ImageButton search_btn;
-    chat_fragment chatFragment;
-    profile_fragment profileFragment;
+    ChatFragment chatFragment;
+    ProfileFragment profileFragment;
     NavigationView navigationView;
+    TextView headername;
     private FirebaseAuth auth;
+    private FirebaseFirestore db;
+    private DocumentReference userRef;
 
 
     Toolbar toolbar;
 
+    @SuppressLint("MissingInflatedId")
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        headername=findViewById(R.id.header_username);
+        auth = FirebaseAuth.getInstance();
+        db = FirebaseFirestore.getInstance();
+        FirebaseUser currentUser = auth.getCurrentUser();
+        if (currentUser != null) {
+            String uid = FirebaseUtil.currentuserid();
+            userRef = db.collection("users").document(uid);
+        }
+
+
 
         toolbar=findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -51,12 +70,12 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
 
-        auth = FirebaseAuth.getInstance();
+
 
         bottomNavigationView = findViewById(R.id.bottom_navigation);
         search_btn=findViewById(R.id.main_search_btn);
-        chatFragment=new chat_fragment();
-        profileFragment=new profile_fragment();
+        chatFragment=new ChatFragment();
+        profileFragment=new ProfileFragment();
         search_btn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -81,10 +100,30 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         });
 
         bottomNavigationView.setSelectedItemId(R.id.chat_menu);
+        setHeaderDetails();
+
 
 
 
     }
+    private void setHeaderDetails() {
+        if (userRef != null) {
+            userRef.get().addOnSuccessListener(new OnSuccessListener<DocumentSnapshot>() {
+                @Override
+                public void onSuccess(DocumentSnapshot documentSnapshot) {
+                    if (documentSnapshot.exists()) {
+                        String username = documentSnapshot.getString("username");
+                        // Update TextView in navigation header
+                        View headerView = navigationView.getHeaderView(0);
+                        TextView headerUsername = headerView.findViewById(R.id.header_username);
+                        headerUsername.setText(username);
+                    }
+                }
+            });
+        }
+    }
+
+
 
     @Override
     public boolean onNavigationItemSelected(@NonNull MenuItem menuItem) {
@@ -132,10 +171,11 @@ public class MainActivity extends AppCompatActivity  implements NavigationView.O
         }
     }
     private void signOut() {
-        auth.signOut();
-        Intent intent = new Intent(MainActivity.this, login_activity.class);
-        intent.addFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+        FirebaseUtil.logout();
+        Intent intent=new Intent(MainActivity.this,splashactivity.class);
+        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK |Intent.FLAG_ACTIVITY_CLEAR_TASK);
         startActivity(intent);
-        finish();
+    }
+    private void setheaderdetails() {
     }
 }

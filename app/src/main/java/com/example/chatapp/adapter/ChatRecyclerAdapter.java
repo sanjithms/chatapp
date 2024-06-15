@@ -1,34 +1,30 @@
 package com.example.chatapp.adapter;
 import android.content.Context;
-import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.chatapp.R;
-import com.example.chatapp.chatacticity;
 import com.example.chatapp.models.ChatMessageModel;
-import com.example.chatapp.utils.androidutils;
-import com.example.chatapp.utils.firebaseutils;
+import com.example.chatapp.utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 
-public class chat_recyle_adapter extends FirestoreRecyclerAdapter<ChatMessageModel, chat_recyle_adapter.ChatModelViewHolder> {
+public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageModel, ChatRecyclerAdapter.ChatModelViewHolder> {
     Context context;
 
-    public chat_recyle_adapter(@NonNull FirestoreRecyclerOptions<ChatMessageModel> options,Context context) {
+    public ChatRecyclerAdapter(@NonNull FirestoreRecyclerOptions<ChatMessageModel> options, Context context) {
         super(options);
         this.context=context;
     }
 
     @Override
     protected void onBindViewHolder(@NonNull ChatModelViewHolder holder, int i, @NonNull ChatMessageModel model) {
-        if (model.getSenderId().equals(firebaseutils.currentuserid())){
+        if (model.getSenderId().equals(FirebaseUtil.currentuserid())){
             holder.leftchatlayout.setVisibility(View.GONE);
             holder.rightchatlayout.setVisibility(View.VISIBLE);
             holder.rightchattxtview.setText(model.getMessage());

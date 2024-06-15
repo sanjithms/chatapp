@@ -4,19 +4,19 @@ import android.content.Context;
 import android.content.Intent;
 import android.widget.Toast;
 
-import com.example.chatapp.models.usermodel;
+import com.example.chatapp.models.UserModel;
 
-public class androidutils {
+public class AndroidUtil {
     public static void showtoast(Context context,String message){
         Toast.makeText(context,message,Toast.LENGTH_LONG).show();
     }
-    public static void passuserdetailsasintent(Intent intent, usermodel model){
+    public static void passuserdetailsasintent(Intent intent, UserModel model){
         intent.putExtra("username",model.getUsername());
         intent.putExtra("phone",model.getPhonenumber());
         intent.putExtra("userId",model.getUserId());
     }
-    public static   usermodel getuserdataforintent(Intent intent){
-        usermodel userModel=new usermodel();
+    public static UserModel getuserdataforintent(Intent intent){
+        UserModel userModel=new UserModel();
         userModel.setUsername(intent.getStringExtra("username"));
         userModel.setPhonenumber(intent.getStringExtra("phone"));
         userModel.setUserId(intent.getStringExtra("userId"));
