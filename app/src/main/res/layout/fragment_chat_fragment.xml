@@ -7,11 +7,9 @@
     android:background="@color/white">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
-        android:layout_width="wrap_content"
+    <androidx.recyclerview.widget.RecyclerView
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:text="Chat Screen"
-        android:textSize="22sp"
-        android:layout_centerInParent="true"/>
+        android:id="@+id/recyle_chat_fragment"/>
 
 </RelativeLayout>

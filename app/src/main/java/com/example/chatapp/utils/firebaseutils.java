@@ -1,10 +1,14 @@
 package com.example.chatapp.utils;
 
+import com.google.firebase.Timestamp;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.firestore.CollectionReference;
 import com.google.firebase.firestore.DocumentReference;
 import com.google.firebase.firestore.FirebaseFirestore;
+
+import java.text.SimpleDateFormat;
+import java.util.List;
 
 public class firebaseutils {
 
@@ -41,5 +45,20 @@ public class firebaseutils {
             return userid2+"_"+userid1;
         }
 
+     }
+     public static  CollectionReference allchatroomCollectionReference(){
+        return FirebaseFirestore.getInstance().collection("chatrooms");
+     }
+     public static DocumentReference getOtherUserFromChatroom(List<String> userIds){
+        if (userIds.get(0).equals(firebaseutils.currentuserid())){
+            return alluserCollectionRefference().document(userIds.get(1));
+        }
+        else {
+            return alluserCollectionRefference().document(userIds.get(0));
+        }
+
+     }
+     public  static String timestamptostring(Timestamp timestamp){
+        return new SimpleDateFormat("HH:MM").format(timestamp.toDate());
      }
 }

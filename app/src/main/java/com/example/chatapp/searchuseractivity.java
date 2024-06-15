@@ -19,11 +19,11 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 import com.google.firebase.firestore.Query;
 
 public class searchuseractivity extends AppCompatActivity {
-    private ImageButton search_btn;
-    private ImageButton back_btn;
-    private RecyclerView recyclerView;
-    private EditText search_edittxt;
-    private search_user_recyle_adapter adapter;
+    ImageButton search_btn;
+    ImageButton back_btn;
+    RecyclerView recyclerView;
+    EditText search_edittxt;
+    search_user_recyle_adapter adapter;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -37,9 +37,13 @@ public class searchuseractivity extends AppCompatActivity {
 
         search_edittxt.requestFocus();
 
-        back_btn.setOnClickListener(v -> onBackPressed());
+        back_btn.setOnClickListener(v -> {
+            onBackPressed();
+        });
 
-        search_btn.setOnClickListener(v -> performSearch());
+        search_btn.setOnClickListener(v -> {
+            performSearch();
+        });
 
         search_edittxt.setOnEditorActionListener(new TextView.OnEditorActionListener() {
             @Override
@@ -74,12 +78,7 @@ public class searchuseractivity extends AppCompatActivity {
                 .whereLessThanOrEqualTo("username", searchuser + "\uf8ff");
 
         FirestoreRecyclerOptions<usermodel> options = new FirestoreRecyclerOptions.Builder<usermodel>()
-                .setQuery(query, usermodel.class)
-                .build();
-
-        if (adapter != null) {
-            adapter.stopListening();
-        }
+                .setQuery(query, usermodel.class).build();
 
         adapter = new search_user_recyle_adapter(options, getApplicationContext());
         recyclerView.setLayoutManager(new LinearLayoutManager(this));
@@ -90,24 +89,21 @@ public class searchuseractivity extends AppCompatActivity {
     @Override
     protected void onStart() {
         super.onStart();
-        if (adapter != null) {
+        if(adapter!=null)
             adapter.startListening();
-        }
     }
 
     @Override
     protected void onStop() {
         super.onStop();
-        if (adapter != null) {
+        if(adapter!=null)
             adapter.stopListening();
-        }
     }
 
     @Override
     protected void onResume() {
         super.onResume();
-        if (adapter != null) {
+        if(adapter!=null)
             adapter.startListening();
-        }
     }
 }

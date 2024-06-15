@@ -20,6 +20,7 @@ import com.firebase.ui.firestore.FirestoreRecyclerOptions;
 public class search_user_recyle_adapter extends FirestoreRecyclerAdapter<usermodel, search_user_recyle_adapter.UserModelViewHolder> {
     Context context;
 
+
     public search_user_recyle_adapter(@NonNull FirestoreRecyclerOptions<usermodel> options,Context context) {
         super(options);
         this.context=context;
@@ -33,12 +34,13 @@ public class search_user_recyle_adapter extends FirestoreRecyclerAdapter<usermod
             holder.usernametxt.setText(model.getUsername()+"(ME)");
 
         }
+
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent=new Intent(context, chatacticity.class);
                 androidutils.passuserdetailsasintent(intent,model);
-                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK );
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
             }
         });

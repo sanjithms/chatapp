@@ -1,14 +1,13 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".chatacticity"
     android:background="@color/white">
 
     <RelativeLayout
-        android:id="@+id/search_toolbar"
+        android:id="@+id/chat_toolbar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:background="@color/my_primary"
@@ -47,7 +46,7 @@
     <androidx.recyclerview.widget.RecyclerView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_below="@+id/search_toolbar"
+        android:layout_below="@+id/chat_toolbar"
         android:layout_above="@+id/bottom_layout"
         android:id="@+id/chat_recylerview"/>
 
@@ -66,6 +65,7 @@
             android:textColorHint="@color/Gray"
             android:layout_margin="10dp"
             android:background="@drawable/rounded_corner"
+            android:layout_marginBottom="10dp"
             android:elevation="4dp"
             android:padding="10dp"
             android:textColor="@color/black"

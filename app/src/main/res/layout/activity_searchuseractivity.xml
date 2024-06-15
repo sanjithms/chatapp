@@ -1,7 +1,6 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
-    android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".searchuseractivity"
@@ -32,8 +31,7 @@
             android:layout_centerVertical="true"
             android:background="?attr/selectableItemBackgroundBorderless"
             android:src="@drawable/backarrow_icon"
-            app:tint="@color/white"
-            android:contentDescription="@string/back_button_desc"/>
+            app:tint="@color/white" />
     </RelativeLayout>
 
     <RelativeLayout
@@ -47,14 +45,14 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:background="@drawable/rounded_corner"
-            android:hint="Username"
-            android:textColorHint="@color/black"
             android:layout_margin="10dp"
+            android:hint="Username"
             android:padding="10dp"
             android:elevation="4dp"
             android:layout_toLeftOf="@+id/search_user_btn"
-            android:textColor="@color/black"
             android:id="@+id/search_edittxt"
+            android:textColorHint="@color/black"
+            android:textColor="@color/black"
             android:imeOptions="actionSearch"
             android:inputType="text"/>
 

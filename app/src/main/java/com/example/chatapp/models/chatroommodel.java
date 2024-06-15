@@ -9,6 +9,7 @@ public class chatroommodel {
     List<String> userids;
     Timestamp lastmessagesenttimestap;
     String Lastmessagesentid;
+    String Lastmessage;
 
     public chatroommodel() {
     }
@@ -50,6 +51,14 @@ public class chatroommodel {
 
     public void setLastmessagesentid(String lastmessagesentid) {
         Lastmessagesentid = lastmessagesentid;
+    }
+
+    public String getLastmessage() {
+        return Lastmessage;
+    }
+
+    public void setLastmessage(String lastmessage) {
+        Lastmessage = lastmessage;
     }
 }
 

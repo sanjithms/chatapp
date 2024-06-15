@@ -46,6 +46,9 @@ public class chatacticity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_chatacticity);
 
+        chatuser = androidutils.getuserdataforintent(getIntent());
+        chatroomID = firebaseutils.getchatroomId(firebaseutils.currentuserid(), chatuser.getUserId());
+
         // Initialize views
         chatedittxt = findViewById(R.id.chat_edittxt);
         chat_txtview = findViewById(R.id.chat_txtview);
@@ -54,17 +57,6 @@ public class chatacticity extends AppCompatActivity {
         recyclerView = findViewById(R.id.chat_recylerview);
 
         // Retrieve the user model from the intent
-        chatuser = androidutils.getuserdataforintent(getIntent());
-
-        // Check if chatuser is null
-        if (chatuser == null) {
-            Toast.makeText(this, "User data is missing!", Toast.LENGTH_SHORT).show();
-            finish();
-            return;
-        }
-
-        // Now that we know chatuser is not null, we can safely use it
-        chatroomID = firebaseutils.getchatroomId(firebaseutils.currentuserid(), chatuser.getUserId());
 
         chat_returnbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -72,9 +64,7 @@ public class chatacticity extends AppCompatActivity {
                 onBackPressed();
             }
         });
-
         chat_txtview.setText(chatuser.getUsername());
-        getorcreateChatroom();
 
         chat_sendbtn.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -86,13 +76,13 @@ public class chatacticity extends AppCompatActivity {
                 sendmessagetouser(message);
             }
         });
+
+        getorcreateChatroom();
         setupchatrecyleview();
+
     }
-    @Override
-    public void onBackPressed() {
-        Log.d("BackPressed", "Back button pressed in chatacticity");
-        super.onBackPressed();
-    }
+
+
 
     private void setupchatrecyleview() {
         Query query = firebaseutils.getChatRoomMessageReference(chatroomID)
@@ -117,9 +107,13 @@ public class chatacticity extends AppCompatActivity {
     }
 
     private void sendmessagetouser(String message) {
-        chatRoommodel.setLastmessagesentid(firebaseutils.currentuserid());
+
         chatRoommodel.setLastmessagesenttimestap(Timestamp.now());
+        chatRoommodel.setLastmessagesentid(firebaseutils.currentuserid());
+        chatRoommodel.setLastmessage(message);
+
         firebaseutils.getchatroomreference(chatroomID).set(chatRoommodel);
+
         ChatMessageModel chatMessageModel=new ChatMessageModel(message,firebaseutils.currentuserid(),Timestamp.now());
         firebaseutils.getChatRoomMessageReference(chatroomID).add(chatMessageModel)
                 .addOnCompleteListener(new OnCompleteListener<DocumentReference>() {
@@ -134,9 +128,8 @@ public class chatacticity extends AppCompatActivity {
     }
 
     private void getorcreateChatroom() {
-        firebaseutils.getchatroomreference(chatroomID).get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
-            @Override
-            public void onComplete(@NonNull Task<DocumentSnapshot> task) {
+        firebaseutils.getchatroomreference(chatroomID).get().addOnCompleteListener(task -> {
+            if(task.isSuccessful()){
                 chatRoommodel = task.getResult().toObject(chatroommodel.class);
                 if (chatRoommodel == null) {
                     chatRoommodel = new chatroommodel(
@@ -145,8 +138,8 @@ public class chatacticity extends AppCompatActivity {
                             Timestamp.now(),
                             ""
                     );
-                }
                 firebaseutils.getchatroomreference(chatroomID).set(chatRoommodel);
+                }
             }
         });
     }
