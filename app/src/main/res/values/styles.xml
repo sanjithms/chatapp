@@ -1,0 +1,11 @@
+<resources>
+    <!-- Custom style for BottomNavigationView -->
+    <style name="BottomNavigationView" parent="Widget.Design.BottomNavigationView">
+        <item name="android:theme">@style/ThemeOverlay.BottomNav</item>
+    </style>
+
+    <!-- Theme overlay for BottomNavigationView -->
+    <style name="ThemeOverlay.BottomNav" parent="">
+        <item name="colorPrimary">@color/my_primary</item>
+    </style>
+</resources>
