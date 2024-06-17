@@ -66,7 +66,8 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         // Initialize Firebase User
         FirebaseUser currentUser = auth.getCurrentUser();
         if (currentUser != null) {
-            userRef = db.collection("users").document(FirebaseUtil.currentuserid());
+            String uid = FirebaseUtil.currentuserid();
+            userRef = db.collection("users").document(uid);
             setUserOnlineStatus(true);  // Set user as online when the app starts
         }
 
@@ -123,14 +124,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
     }
 
     @Override
-    protected void onResume() {
-        super.onResume();
-        if (userRef != null) {
-            setUserOnlineStatus(true);
-        }
-    }
-
-    @Override
     protected void onStop() {
         super.onStop();
         // Update user status to offline
@@ -139,7 +132,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             userRef.update("lastOnline", Timestamp.now());
         }
     }
-
 
     private void setUserOnlineStatus(boolean isOnline) {
         if (userRef != null) {
@@ -179,9 +171,6 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
             return true;
         } else if (itemid == R.id.nav_logout) {
             signOut();
-            return true;
-        } else if (itemid == R.id.nav_sethings) {
-            startActivity(new Intent(MainActivity.this, Settings.class));
             return true;
         } else if (itemid == R.id.nav_share) {
             Toast.makeText(this, "Shared Successfully", Toast.LENGTH_SHORT).show();
