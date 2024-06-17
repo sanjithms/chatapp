@@ -1,6 +1,7 @@
 package com.example.chatapp.adapter;
 import android.content.Context;
 import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,8 @@ import com.example.chatapp.utils.AndroidUtil;
 import com.example.chatapp.utils.FirebaseUtil;
 import com.firebase.ui.firestore.FirestoreRecyclerAdapter;
 import com.firebase.ui.firestore.FirestoreRecyclerOptions;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
 
 public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserModel, SearchUserRecyclerAdapter.UserModelViewHolder> {
     Context context;
@@ -34,6 +37,16 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
             holder.usernametxt.setText(model.getUsername()+"(ME)");
 
         }
+        FirebaseUtil.getotherprofilepivstorageref(model.getUserId()).getDownloadUrl()
+                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> t) {
+                        if (t.isSuccessful()){
+                            Uri uri=t.getResult();
+                            AndroidUtil.setProfilePic(context,uri,holder.profilepic);
+                        }
+                    }
+                });
 
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,13 +69,13 @@ public class SearchUserRecyclerAdapter extends FirestoreRecyclerAdapter<UserMode
     class UserModelViewHolder extends RecyclerView.ViewHolder{
         TextView usernametxt;
         TextView phonetxt;
-        ImageView prifilepic;
+        ImageView profilepic;
 
         public UserModelViewHolder(@NonNull View itemView) {
             super(itemView);
             usernametxt=itemView.findViewById(R.id.user_profile_name);
             phonetxt=itemView.findViewById(R.id.user_phone_number);
-            prifilepic=itemView.findViewById(R.id.profile_pic_view);
+            profilepic=itemView.findViewById(R.id.profile_pic_view);
 
         }
     }

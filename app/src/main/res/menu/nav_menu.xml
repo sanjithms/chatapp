@@ -21,6 +21,11 @@
             android:icon="@drawable/search_icon"
             android:title="Search"/>
 
+        <item
+            android:id="@+id/nav_sethings"
+            android:icon="@drawable/settings_icon"
+            android:title="Settings"/>
+
 
         <item
             android:id="@+id/nav_share"

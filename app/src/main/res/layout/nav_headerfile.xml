@@ -3,16 +3,21 @@
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:orientation="vertical"
     android:layout_width="match_parent"
-    android:layout_height="176dp"
+    android:layout_height="200dp"
     android:gravity="bottom"
     android:padding="16dp"
     android:background="@color/my_primary"
     android:theme="@style/ThemeOverlay.AppCompat.Dark">
 
     <ImageView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:src="@drawable/aklogo"/>
+        android:layout_width="90dp"
+        android:layout_height="90dp"
+        android:background="@drawable/circular_bg"
+        android:src="@drawable/profile_icon"
+        android:backgroundTint="@color/my_primary"
+        android:scaleType="centerCrop"
+        android:layout_marginBottom="20dp"
+        android:id="@+id/header_profile_pic_view"/>
 
     <TextView
         android:layout_width="wrap_content"

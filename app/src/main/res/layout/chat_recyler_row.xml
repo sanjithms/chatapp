@@ -10,17 +10,26 @@
         android:layout_height="wrap_content"
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/chat_color_sender"
-        android:padding="8dp"
+        android:padding="6dp"
         android:layout_marginEnd="80dp"
-        android:id="@+id/left_chat_layout">
+        android:id="@+id/left_chat_layout"
+        android:orientation="vertical"
+        android:layout_marginStart="10dp">
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:textColor="@color/white"
             android:textSize="18sp"
-            android:id="@+id/left_chat_txtview"
-            android:layout_margin="10dp"/>
+            android:id="@+id/left_chat_txtview" />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/soft_black"
+            android:textSize="8sp"
+            android:id="@+id/left_chat_time_txtview"
+            />
+
     </LinearLayout>
     <LinearLayout
         android:layout_width="wrap_content"
@@ -28,9 +37,11 @@
         android:background="@drawable/rounded_corner"
         android:backgroundTint="@color/chat_color_receiver"
         android:layout_alignParentEnd="true"
-        android:padding="8dp"
+        android:padding="6dp"
         android:layout_marginStart="80dp"
-        android:id="@+id/right_chat_layout">
+        android:id="@+id/right_chat_layout"
+        android:layout_marginEnd="10dp"
+        android:orientation="vertical">
 
         <TextView
             android:layout_width="wrap_content"
@@ -38,7 +49,14 @@
             android:textColor="@color/white"
             android:textSize="18sp"
             android:id="@+id/right_chat_txtview"
-            android:layout_margin="10dp"/>
+            />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/soft_black"
+            android:textSize="8sp"
+            android:id="@+id/right_chat_time_txtview"
+            />
     </LinearLayout>
 
 </RelativeLayout>

@@ -28,20 +28,43 @@
                 tools:text="User name"
                 android:textSize="18sp"
                 android:textStyle="bold"
+                android:textColor="@color/pure_black"
                 android:id="@+id/user_name_text"/>
+
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                tools:text="10:00"
                 android:layout_alignParentEnd="true"
                 android:layout_marginEnd="10dp"
-                android:id="@+id/last_message_time_text"/>
+                android:textColor="@color/soft_black"
+                android:text="Online"
+                android:textSize="15sp"
+                android:id="@+id/chat_Recyleonlinestatus"
+                />
         </RelativeLayout>
 
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                tools:text="+000000000000"
+                android:textColor="@color/dark_gray"
+                android:id="@+id/last_message_text"/>
+
+
+        </RelativeLayout>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            tools:text="+000000000000"
-            android:id="@+id/last_message_text"/>
+            tools:text="10:00"
+            android:textSize="10sp"
+            android:layout_alignParentEnd="true"
+            android:layout_marginEnd="10dp"
+            android:textColor="@color/soft_black"
+            android:id="@+id/last_message_time_text"/>
+
+
     </LinearLayout>
 </LinearLayout>

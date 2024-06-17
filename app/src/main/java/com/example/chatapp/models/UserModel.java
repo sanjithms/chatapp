@@ -7,6 +7,8 @@ public class UserModel {
     private String username;
     private Timestamp createdtimestap;
     private String userId;
+    private boolean isOnline;
+    private  String fcmtoken;
 
     public UserModel() {
     }
@@ -48,5 +50,14 @@ public class UserModel {
 
     public void setUserId(String userId) {
         this.userId = userId;
+    }
+
+
+    public String getFcmtoken() {
+        return fcmtoken;
+    }
+
+    public void setFcmtoken(String fcmtoken) {
+        this.fcmtoken = fcmtoken;
     }
 }

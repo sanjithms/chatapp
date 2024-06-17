@@ -12,18 +12,37 @@
         android:layout_height="wrap_content"
         android:background="@color/my_primary"
         android:padding="10dp">
-
-        <TextView
+        <LinearLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginStart="10dp"
+            android:orientation="vertical"
             android:layout_centerVertical="true"
-            android:text="Search User"
-            android:textColor="@color/white"
-            android:textSize="22sp"
-            android:textStyle="bold"
             android:layout_toEndOf="@+id/profile_pic_layout"
-            android:id="@+id/chat_txtview"/>
+            >
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Search User"
+                android:textColor="@color/white"
+                android:textSize="22sp"
+                android:textStyle="bold"
+                android:id="@+id/chat_txtview"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="10dp"
+                android:text="Online"
+                android:textColor="@color/white"
+                android:textSize="15sp"
+                android:textStyle="bold"
+                android:id="@+id/chat_onlinestatus"
+                />
+
+        </LinearLayout>
+
+
 
         <include layout="@layout/profile_pic_view"
             android:layout_width="48dp"

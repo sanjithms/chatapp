@@ -1,12 +1,17 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
     <color name="black">#FF000000</color>
     <color name="white">#FFFFFFFF</color>
-    <color name="my_primary">#FF5964</color>
-    <color name="my_primary_variant">#FF4A55</color> <!-- Adjusted variant for dark theme -->
-    <color name="my_secondary">#FFE74C</color>
-    <color name="my_secondary_variant">#FFD700</color> <!-- Adjusted variant for dark theme -->
-    <color name="Gray">#C3C3C3</color>
+    <color name="my_primary">#00897B</color> <!-- New Primary Color -->
+    <color name="my_primary_variant">#00796B</color> <!-- Variant of the new Primary Color -->
+    <color name="my_secondary">#FF7043</color> <!-- New Secondary Color -->
+    <color name="my_secondary_variant">#F4511E</color> <!-- Variant of the new Secondary Color -->
+    <color name="Gray">#C3C3C3</color> <!-- Corrected to lowercase for consistency -->
     <color name="off_white">#FAFAFA</color>
+    <color name="pure_black">#000000</color>
+    <color name="dark_gray">#212121</color>
+    <color name="soft_black">#333333</color>
+
     <color name="chat_color_sender">#1E88E5</color>
     <color name="chat_color_receiver">#7CB342</color>
 </resources>
