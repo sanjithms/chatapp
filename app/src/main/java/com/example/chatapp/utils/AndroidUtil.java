@@ -29,4 +29,5 @@ public class AndroidUtil {
     public static void setProfilePic(Context context, Uri imageuri, ImageView imageView){
         Glide.with(context).load(imageuri).apply(RequestOptions.circleCropTransform()).into(imageView);
     }
+
 }

@@ -175,26 +175,33 @@ public class ProfileFragment extends Fragment {
     private void getuserdetails() {
         setprogress(true);
         FirebaseUtil.getCurrentprofilepivstorageref().getDownloadUrl()
-                        .addOnCompleteListener(new OnCompleteListener<Uri>() {
-                            @Override
-                            public void onComplete(@NonNull Task<Uri> task) {
-                                if (task.isSuccessful()){
-                                    Uri uri=task.getResult();
-                                    AndroidUtil.setProfilePic(getContext(),uri,profilepic);
-                                }
+                .addOnCompleteListener(new OnCompleteListener<Uri>() {
+                    @Override
+                    public void onComplete(@NonNull Task<Uri> task) {
+                        if (task.isSuccessful()) {
+                            Uri uri = task.getResult();
+                            // Check if the fragment is attached to its context before loading the image
+                            if (isAdded() && getContext() != null) {
+                                AndroidUtil.setProfilePic(getContext(), uri, profilepic);
                             }
-                        });
+                        }
+                        setprogress(false);
+                    }
+                });
+
         FirebaseUtil.currentuserdetaild().get().addOnCompleteListener(new OnCompleteListener<DocumentSnapshot>() {
             @Override
             public void onComplete(@NonNull Task<DocumentSnapshot> task) {
                 setprogress(false);
-                currentusermodel=task.getResult().toObject(UserModel.class);
-                profile_username.setText(currentusermodel.getUsername());
-                profile_phonenum.setText(currentusermodel.getPhonenumber());
-
+                if (task.isSuccessful()) {
+                    currentusermodel = task.getResult().toObject(UserModel.class);
+                    profile_username.setText(currentusermodel.getUsername());
+                    profile_phonenum.setText(currentusermodel.getPhonenumber());
+                }
             }
         });
     }
+
     void setprogress(boolean inprogress){
         if (inprogress){
             progressBar.setVisibility(View.VISIBLE);

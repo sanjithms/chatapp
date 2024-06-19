@@ -72,9 +72,17 @@ public class searchuseractivity extends AppCompatActivity {
     }
 
     private void setupRecyclerView(String searchuser) {
-        Query query = FirebaseUtil.alluserCollectionRefference()
-                .whereGreaterThanOrEqualTo("username", searchuser)
-                .whereLessThanOrEqualTo("username", searchuser + "\uf8ff");
+        Query query;
+
+        if (searchuser.isEmpty()) {
+            query = FirebaseUtil.alluserCollectionRefference()
+                    .orderBy("username", Query.Direction.ASCENDING); // Order alphabetically by username
+        } else {
+            query = FirebaseUtil.alluserCollectionRefference()
+                    .whereGreaterThanOrEqualTo("username", searchuser)
+                    .whereLessThanOrEqualTo("username", searchuser + "\uf8ff")
+                    .orderBy("username", Query.Direction.ASCENDING); // Order alphabetically by username
+        }
 
         FirestoreRecyclerOptions<UserModel> options = new FirestoreRecyclerOptions.Builder<UserModel>()
                 .setQuery(query, UserModel.class).build();
@@ -84,6 +92,7 @@ public class searchuseractivity extends AppCompatActivity {
         recyclerView.setAdapter(adapter);
         adapter.startListening();
     }
+
 
 
 }
