@@ -13,7 +13,8 @@
         <ImageView
             android:layout_width="160dp"
             android:layout_height="160dp"
-            android:src="@drawable/baseline_account_circle_24" />
+            android:src="@drawable/baseline_account_circle_24"
+            app:tint="@color/off_white"/>
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -27,6 +28,7 @@
             android:layout_width="32dp"
             android:layout_height="32dp"
             android:visibility="visible"
+            android:indeterminateTint="@color/off_white"
             android:layout_marginTop="20dp"/>
 
 

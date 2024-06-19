@@ -153,6 +153,7 @@ public class ChatRecyclerAdapter extends FirestoreRecyclerAdapter<ChatMessageMod
                                         "lastmessage", lastMessage,
                                         "lastmessagesenttimestap", lastMessageTimestamp);
                     }
+
                 });
     }
 

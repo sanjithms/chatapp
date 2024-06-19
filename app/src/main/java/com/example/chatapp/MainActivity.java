@@ -169,6 +169,10 @@ public class MainActivity extends AppCompatActivity implements NavigationView.On
         } else if (itemid == R.id.nav_search) {
             startActivity(new Intent(MainActivity.this, searchuseractivity.class));
             return true;
+        }
+        else if (itemid == R.id.nav_sethings) {
+            startActivity(new Intent(MainActivity.this, Settings.class));
+            return true;
         } else if (itemid == R.id.nav_logout) {
             signOut();
             return true;

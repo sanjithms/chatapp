@@ -1,5 +1,6 @@
 package com.example.chatapp;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.content.Intent;
 import android.net.Uri;
@@ -16,6 +17,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.TextView;
@@ -40,6 +42,7 @@ public class ProfileFragment extends Fragment {
     EditText profile_username;
     EditText profile_phonenum;
     Button profile_updatebtn;
+    ImageButton prfile_settings;
     ProgressBar progressBar;
     UserModel currentusermodel;
     ActivityResultLauncher<Intent> imagepickerlauncher;
@@ -66,6 +69,7 @@ public class ProfileFragment extends Fragment {
                 );
     }
 
+    @SuppressLint("MissingInflatedId")
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
@@ -77,8 +81,18 @@ public class ProfileFragment extends Fragment {
         profile_phonenum=view.findViewById(R.id.profile_phonenumber);
         profile_updatebtn=view.findViewById(R.id.profile_updatebtn);
         progressBar=view.findViewById(R.id.profile_progressbar);
+        prfile_settings=view.findViewById(R.id.profile_settings);
+
 
         getuserdetails();
+        prfile_settings.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), Settings.class);
+                startActivity(intent);
+            }
+        });
+
         profile_updatebtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

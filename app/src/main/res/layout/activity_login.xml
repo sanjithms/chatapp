@@ -62,7 +62,7 @@
     <ImageView
         android:layout_width="150dp"
         android:layout_height="150dp"
-        android:src="@drawable/phonelogo"
+        android:src="@drawable/chat_icon"
         android:layout_marginTop="10dp"
         app:tint="@color/my_primary"
         android:layout_weight="20"/>
