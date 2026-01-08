@@ -1,65 +1,68 @@
-# 💬 ChatApp: Real-Time Communication Suite
+# 💬 ChatApp: Native Android Real-Time Suite
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-blue.svg)](https://opensource.org/licenses/MIT)
-[![Build Status](https://img.shields.io/badge/Maintained%3F-yes-green.svg)](https://github.com/sanjithms/chatapp)
+[![Platform](https://img.shields.io/badge/Platform-Android-3DDC84.svg?logo=android)](https://www.android.com/)
+[![Language](https://img.shields.io/badge/Language-Java-ED8B00.svg?logo=java)](https://www.java.com/)
+[![Backend](https://img.shields.io/badge/Backend-Firebase-FFCA28.svg?logo=firebase)](https://firebase.google.com/)
 [![Version](https://img.shields.io/badge/Version-1.0.0-gold.svg)](#)
 
-A powerful, full-stack real-time messaging platform engineered for seamless communication. Developed over **6 months**, this application focuses on low-latency data synchronization, robust user security, and a modern, fluid user interface.
+A high-performance, native Android messaging platform engineered over **6 months** of intensive development. This application leverages the power of **Java** and **Firebase** to provide a seamless, secure, and low-latency communication experience.
 
 ---
 
 ## 📖 Project Overview
 
-**ChatApp** is a scalable solution for instant messaging, bridging the gap between desktop and mobile users. Built with a focus on real-time architecture, the app ensures that every message, typing indicator, and status update is delivered with sub-second latency.
+**ChatApp** is a robust mobile solution designed for instant connectivity. Developed using **Android Studio**, it utilizes a real-time NoSQL architecture to ensure that messages, media, and user states are synchronized instantly across all devices.
 
-### The Vision:
-In a world of constant connection, this app was built to provide a secure, distraction-free environment for high-quality conversations, supporting rich media and personalized user experiences.
+### 🛠 The 6-Month Engineering Journey:
+* **UI/UX Refinement:** Dozens of iterations in XML to achieve a fluid "Glassmorphism" design.
+* **Database Optimization:** Structured Firebase Realtime Database/Firestore for high-speed retrieval.
+* **Complex Logic:** Implementation of custom Adapters, Fragments, and Service listeners for background sync.
 
 ---
 
 ## 🚀 Key Features
 
-* **Real-Time Messaging:** Instant message delivery using WebSockets/Firebase listeners for a true live experience.
-* **Secure Authentication:** Multi-factor ready login system with email/password and social OAuth support.
-* **Media Sharing:** Seamlessly upload and share images, documents, and videos directly in the chat.
-* **User Presence Tracking:** Real-time "Online/Offline" status and "Typing..." indicators.
-* **Group Conversations:** Create and manage chat rooms with multiple participants.
-* **Advanced Profile Customization:** Change avatars, update bios, and manage notification settings.
-* **Message History:** Fully persistent chat logs that load instantly upon login.
+* **Instant Messaging:** Real-time text delivery powered by Firebase Realtime Database.
+* **Firebase Authentication:** Secure login/signup using Email and Google OAuth.
+* **Multimedia Sharing:** Send images and documents via Firebase Storage integration.
+* **Live Presence System:** Real-time "Online" status tracking and typing indicators.
+* **Push Notifications:** Integrated **Firebase Cloud Messaging (FCM)** for instant alerts.
+* **User Search & Discovery:** Find friends instantly using an optimized search query logic.
+* **Profile Management:** Custom avatars and bio updates with real-time reflect.
 
 ---
 
 ## 📸 Output & Visuals
 
-The interface follows a "Glassmorphism" aesthetic for a premium, modern feel.
+The app features a modern, clean interface built entirely with custom XML layouts.
 
-| Main Dashboard | Mobile Chat UI |
+| Login/Auth Screen | Chat Interface |
 |:---:|:---:|
-| <img src="./screenshots/chat_desktop.png" width="450" alt="Desktop View" /> | <img src="./screenshots/chat_mobile.png" width="220" alt="Mobile View" /> |
+| <img src="./screenshots/auth_mobile.png" width="250" alt="Login View" /> | <img src="./screenshots/chat_mobile.png" width="250" alt="Chat View" /> |
 
-*(Note: Add your high-quality screenshots to the `/screenshots` folder)*
+> **Note:** Screenshots are located in the `/screenshots` directory.
 
 ---
 
 ## 🛠️ Technical Stack & Architecture
 
-This project follows a **Modular Client-Server Architecture** designed for high availability.
+Built with a **Model-View-Controller (MVC)** pattern for clear separation of concerns.
 
-| Component | Technology | Role |
+| Component | Technology | Description |
 |:--- |:--- |:--- |
-| **Frontend** | React.js / Vite | High-speed component rendering and state management. |
-| **Styling** | Tailwind CSS | Utility-first, responsive design framework. |
-| **Backend** | Node.js / Firebase | API handling and real-time backend logic. |
-| **Database** | Firestore / MongoDB | NoSQL storage for fast JSON-based data retrieval. |
-| **Real-time** | Socket.IO / Firebase Sync | Bidirectional communication channel. |
-| **Storage** | Cloud Storage | Secure hosting for shared media and avatars. |
+| **Language** | Java (JDK 11+) | Core application logic and multi-threading. |
+| **UI Design** | XML / Material Design | Responsive layouts and custom animations. |
+| **Backend** | Firebase Realtime DB | JSON-based cloud database for live sync. |
+| **Authentication** | Firebase Auth | Secure identity management and session handling. |
+| **Media Hosting** | Firebase Storage | Scalable storage for shared user content. |
+| **Networking** | Retrofit / Volley | API integration for external data services. |
 
 ---
 
-## ⚙️ Detailed Installation
+## ⚙️ Installation & Setup
 
-### 1. Clone & Install
-```bash
-git clone [https://github.com/sanjithms/chatapp.git](https://github.com/sanjithms/chatapp.git)
-cd chatapp
-npm install
+To run this project in **Android Studio**:
+
+1. **Clone the Project**
+   ```bash
+   git clone [https://github.com/sanjithms/chatapp.git](https://github.com/sanjithms/chatapp.git)
